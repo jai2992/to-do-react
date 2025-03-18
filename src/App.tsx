@@ -117,7 +117,7 @@ export default function App() {
   return (
     <div className="flex flex-col h-full justify-center items-center bg-amber-100">
       <div className="flex flex-col max-w-[60%]">
-        <div className="flex justify-center items-center text-[60px] font-extrabold mb-7">
+        <div className="flex justify-center items-center text-[40px] font-extrabold mb-7">
           AI TO-DO LIST MAKER PRO !
         </div>
         <form onSubmit={(e)=>handleSubmit(e)} className="flex bg-gray-400 p-[20px] border-2 rounded-2xl justify-around items-center hover:shadow-2xl">
