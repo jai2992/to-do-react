@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import {FormEvent, useEffect, useState } from "react"
 
 type taskType = {
   id:number,
@@ -29,11 +29,14 @@ export default function App() {
     notify(newTaskId)
   },[tasks])
   
-  function handleSubmit(){
+  function handleSubmit(e:FormEvent<HTMLFormElement>){
+    e.preventDefault();
     let id = Date.now();
     let newTask:taskType = {id:id,name:taskName,des:taskDes,time:taskTime,status:false};
     setNewTaskId(id);
     setTasks((prevTasks)=>[...prevTasks,newTask]);
+    setTaskName("")
+    setTaskDesc("")
   }
 
   function handleEdit(id:number){
@@ -118,10 +121,12 @@ export default function App() {
           AI TO-DO LIST MAKER PRO !
         </div>
         <div className="flex bg-gray-400 p-[20px] border-2 rounded-2xl justify-around items-center hover:shadow-2xl">
-          <input className="p-[5px] focus:border-0 focus:outline-0 placeholder:text-black-50 bg-amber-100 rounded-xl text-center shadow-2xs" type="text" placeholder="Enter the task name" onChange={(e)=>setTaskName(e.target.value)} />
-          <input className="p-[5px] focus:border-0 focus:outline-0 placeholder:text-black-50 bg-amber-100 rounded-xl text-center shadow-2xs" type="text" placeholder="Enter the task description" onChange={(e)=>setTaskDesc(e.target.value)} />
-          <input className="p-[5px] focus:border-0 focus:outline-0 placeholder:text-black-50 bg-amber-100 rounded-xl text-center shadow-2xs" type="time" placeholder="time" name="taskTime" onChange={(e)=>setTaskTime(e.target.value)} />
-          <button className="bg-blue-500 transition-all hover:bg-blue-400 hover:text-black px-2 py-1 rounded-[8px] text-white" onClick={handleSubmit}>Add Task</button>
+          <form action="" onSubmit={(e)=>handleSubmit(e)}>
+          <input className="p-[5px] focus:border-0 focus:outline-0 placeholder:text-black-50 bg-amber-100 rounded-xl text-center shadow-2xs" type="text" placeholder="Enter the task name" onChange={(e)=>setTaskName(e.target.value)} value={taskName} required />
+          <input className="p-[5px] focus:border-0 focus:outline-0 placeholder:text-black-50 bg-amber-100 rounded-xl text-center shadow-2xs" type="text" placeholder="Enter the task description" onChange={(e)=>setTaskDesc(e.target.value)} value={taskDes} required />
+          <input className="p-[5px] focus:border-0 focus:outline-0 placeholder:text-black-50 bg-amber-100 rounded-xl text-center shadow-2xs" type="time" placeholder="time" name="taskTime" onChange={(e)=>setTaskTime(e.target.value)}value={taskTime} required />
+          <button className="bg-blue-500 transition-all hover:bg-blue-400 hover:text-black px-2 py-1 rounded-[8px] text-white">Add Task</button>
+          </form>
           <button className="bg-green-500 transition-all hover:bg-green-400 hover:text-black px-2 py-1 rounded-[8px] text-white" onClick={()=>handleSave()}>Save</button>
         </div>
         <div className="flex justify-center items-center flex-wrap gap-[30px] mt-[20px]">
