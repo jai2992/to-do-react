@@ -72,7 +72,7 @@ export default function App() {
   function handleStatus(id: number) {
     setTasks((prev) =>
       prev.map((task) =>
-        task.id === id ? { ...task, status: !task.status } : task
+        task.id === id ? { ...task, status: true } : task
       )
     );
   }
